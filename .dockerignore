@@ -1,0 +1,16 @@
+node_modules
+coverage
+.git
+.dockerignore
+Dockerfile
+docker-compose.yaml
+README.md
+.env.example
+.eslintignore
+eslint.config.js
+.npmrc
+.prettierignore
+.prettierrc
+.github
+bun.lockb
+bun.lock
