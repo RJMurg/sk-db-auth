@@ -1,3 +1,4 @@
+![](https://api.murga.cloud/raster/header?title=SK%20DB%20AUTH&subtitle=My%20SvelteKit%20Template%20with%20DB%20support%20and%20auth)
 # SK DB AUTH
 
 SK DB is my personal template for building SvelteKit applications with databases & auth.
