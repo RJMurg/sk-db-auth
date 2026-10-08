@@ -1,12 +1,12 @@
+import type { Handle } from '@sveltejs/kit/hooks';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { svelteKitHandler } from 'better-auth/svelte-kit';
 import { genericOAuth } from 'better-auth/plugins';
 import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { prisma } from './prisma';
-import { building } from '$app/environment';
-import type { Handle } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
+import { building } from '$app/env';
+import { MURGID_CLIENT_ID, MURGID_CLIENT_SECRET, MURGID_DISCOVERY_URL } from '$app/env/private';
 import { getRequestEvent } from '$app/server';
 
 const plugins = [
@@ -14,9 +14,9 @@ const plugins = [
 		config: [
 			{
 				providerId: 'murgid',
-				clientId: env.MURGID_CLIENT_ID!,
-				clientSecret: env.MURGID_CLIENT_SECRET,
-				discoveryUrl: env.MURGID_DISCOVERY_URL,
+				clientId: MURGID_CLIENT_ID!,
+				clientSecret: MURGID_CLIENT_SECRET,
+				discoveryUrl: MURGID_DISCOVERY_URL,
 				scopes: ['openid', 'email', 'profile', 'groups']
 			}
 		]
@@ -29,7 +29,7 @@ export const authHandler: Handle = async ({ event, resolve }) => {
 	const auth = betterAuth({
 		database: prismaAdapter(prisma, { provider: 'postgresql' }),
 		experimental: { joins: true },
-		plugins: plugins
+		plugins
 	});
 
 	const session = await auth.api.getSession({
